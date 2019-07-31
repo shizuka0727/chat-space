@@ -1,11 +1,9 @@
 ## usersテーブル
 |Column|Type|Options|
 |------|----|-------|
-|email|string|null: false|
-|password|string|null: false|
-|username|string|null: false|
+|name|string|null: false, index: true|
 ### Association
-- has_many :post
+- has_many :posts
 - has_many :users_groups
 - has_many :groups,  through:  :users_groups
 
@@ -14,23 +12,26 @@
 |------|----|-------|
 |massage|text||
 |image|text||
-|user_id|integer|null: false, foreign_key: true|
+|user|references|null: false, foreign_key: true|
+|group|references|null: false, foreign_key: true|
 ### Association
 - belongs_to :user
+- belongs_to :group
 
 ## groupsテーブル
 |Column|Type|Options|
 |------|----|-------|
-|groupname|text|null: false|
+|name|text|null: false|
 ### Association
 - has_many :users_groups
 - has_many :users,  through:  :users_groups
+- has_many :posts
 
 ## users_groupsテーブル
 |Column|Type|Options|
 |------|----|-------|
-|user_id|integer|null: false, foreign_key: true|
-|group_id|integer|null: false, foreign_key: true|
+|user|references|null: false, foreign_key: true|
+|group|references|null: false, foreign_key: true|
 ### Association
 - belongs_to :user
 - belongs_to :group
