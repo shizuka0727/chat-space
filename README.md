@@ -10,8 +10,8 @@
 ## postsテーブル
 |Column|Type|Options|
 |------|----|-------|
-|massage|text||
-|image|text||
+|massage|string||
+|image|string||
 |user|references|null: false, foreign_key: true|
 |group|references|null: false, foreign_key: true|
 ### Association
@@ -21,7 +21,7 @@
 ## groupsテーブル
 |Column|Type|Options|
 |------|----|-------|
-|name|text|null: false|
+|name|string|null: false|
 ### Association
 - has_many :users_groups
 - has_many :users,  through:  :users_groups
