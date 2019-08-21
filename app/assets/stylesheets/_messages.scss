@@ -37,7 +37,7 @@ $point-color: #38AEF0;
     color: none !important;
     display: flex;
   &__side--new-groups {
-    padding-left: 4px;
+  padding-left: 4px;
     }
 }
 }
@@ -92,7 +92,7 @@ $point-color: #38AEF0;
     }
 .message__current {
     background-color: #fafafa;
-    height: 100vh;
+    height: calc(100vh - 90px);
     padding: 46px 40px 0 40px; 
     overflow: scroll;
   }
@@ -120,7 +120,7 @@ $point-color: #38AEF0;
     display: flex;
     justify-content: space-between;
     position: absolute;
-    bottom: 0;
+    bottom: 0
 
   &__text-field {
     height: 50px;
