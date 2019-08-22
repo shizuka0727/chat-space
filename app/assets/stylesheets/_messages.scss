@@ -1,4 +1,5 @@
-$point-color: #38AEF0;
+@import "config/colors";
+@import "config/font_size";
 
 * {
     box-sizing: border-box;
@@ -34,7 +35,7 @@ $point-color: #38AEF0;
     padding: 0 20px;
 
 .icons {
-    color: none !important;
+    color: none;
     display: flex;
   &__side--new-groups {
     padding-left: 4px;
