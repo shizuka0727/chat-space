@@ -1,24 +1,23 @@
 .chat
-  = render 'devise/shared/side_bar' 
-  .chat__side
-    .chat__side--header
-      .chat__side--header-box
-        egusa
-        .icons
-          .icons__side--edit-user
-            %i.fa.fa-edit
-          .icons__side--new-groups
-            %i.fa.fa-cog
-    .chat__side--groups
-      %h1.chat__side--groupname sample-group
-      %p.chat__side--message bye
-      %h2.chat__side--name example
-      %p.chat__side--message bye
-      %h4.chat__side--name sample-name
-      %p.chat__side--message Follow me
-      %h4.chat__side--name Seo
-      %p.chat__side--message まだメッセージがありません。
-  
+  .side-bar
+    .header
+      %h3.header__name
+        =current_user.name
+      %ul.header__lists
+        %li.list
+          = link_to new_group_path do
+            = fa_icon 'pencil-square-o', class: 'icon'
+        %li.list
+          = link_to edit_user_path(current_user) do
+            = fa_icon 'cog', class: 'icon'
+    .groups
+      - current_user.groups.each do |group|
+        .group
+          = link_to group_messages_path(group) do
+            .group__name
+              = group.name
+            .group__message
+              メッセージはまだありません。
   .chat__main
     .header__main--box
       .header__main--box-left
@@ -26,28 +25,22 @@
         %h6.menbers_list Member: test-user
       .header__main--box-right  
         %a.btn_edit Edit
-    .message__current
-      .message__info--upper
-        .message__info_talker SEO
-        .message__info_date 2019/8/12(sat) 00:00:00
-      .message__info--text こんにちは！
-      .message__info--upper
-        .message__info_talker Tom
-        .message__info_date 2019/8/12(sat) 10:00:00
-      .message__info--text Hi!
-      .message__info--upper
-        .message__info_talker Mio
-        .message__info_date 2019/8/12(sat) 10:00:00
-      .message__info--text さようなら
-      .message__info--upper
-        .message__info_talker Mao
-        .message__info_date 2019/8/12(sat) 10:00:00
-      .message__info--text まだまだ先は長い。
-      .message__info--upper
-        .message__info_talker Moe
-        .message__info_date 2019/8/9(thu) 10:00:00
-      .message__info--text やっとできました。
-    .posts
-      %form
-        %input.posts__text-field{:type => "text"}
-        %button.posts__submit{:type => "submit"} Send
+    .message
+      .upper-message
+        .upper-message__user-name
+          = message.user.name
+        .upper-message__date
+          = message.created_at.strftime("%Y/%m/%d %H:%M")
+      .lower-message
+        - if message.content.present?
+          %p.lower-message__content
+            = message.content
+        = image_tag message.image.url, class: 'lower-message__image' if message.image.present?
+    .form
+      = form_for [@group, @message] do |f|
+        = f.text_field :content, class: 'form__message', placeholder: 'type a message'
+        .form__mask
+          = f.label :image, class: 'form__mask__image' do
+            = fa_icon 'picture-o', class: 'icon'
+            = f.file_field :image, class: 'hidden'
+        = f.submit 'Send', class: 'form__submit'
