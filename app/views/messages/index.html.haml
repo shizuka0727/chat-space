@@ -1,17 +1,14 @@
-.flat__box--top
-  グループを作成しました
 .chat
+  = render 'devise/shared/side_bar' 
   .chat__side
     .chat__side--header
       .chat__side--header-box
         egusa
         .icons
           .icons__side--edit-user
-            = link_to messages_path do
-              %i.fa.fa-edit
+            %i.fa.fa-edit
           .icons__side--new-groups
-            = link_to messages_path do
-              %i.fa.fa-cog
+            %i.fa.fa-cog
     .chat__side--groups
       %h1.chat__side--groupname sample-group
       %p.chat__side--message bye
@@ -21,6 +18,7 @@
       %p.chat__side--message Follow me
       %h4.chat__side--name Seo
       %p.chat__side--message まだメッセージがありません。
+  
   .chat__main
     .header__main--box
       .header__main--box-left
