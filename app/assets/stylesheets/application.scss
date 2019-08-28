@@ -10,4 +10,8 @@
 @import "./reset";
 @import "./side_bar";
 @import "./user";
-@import "./variable"
+@import "./variable";
+
+* {
+  box-sizing: border-box;
+  }
