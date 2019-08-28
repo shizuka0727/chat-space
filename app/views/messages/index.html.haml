@@ -1,26 +1,41 @@
 .chat
-  .chat__main
-    .header__main--box
-      .header__main--box-left
-        %h5.group_name name of group
-        %h6.menbers_list Member: test-user
-      .header__main--box-right  
-        %a.btn_edit Edit
-    .message
-      .upper-message
-        .upper-message__user-name
-          = message.user.name
-        .upper-message__date
-          = message.created_at.strftime("%Y/%m/%d %H:%M")
-      .lower-message
-        - if message.content.present?
-          %p.lower-message__content
-            = message.content
-        = image_tag message.image.url, class: 'lower-message__image' if message.image.present?
+  .side-bar
+    .header
+      %h3.header__name
+        = current_user.name
+      %ul.header__lists
+        %li.list
+          = link_to new_group_path do
+            = fa_icon 'pencil-square-o', class: 'icon'
+        %li.list
+          = link_to edit_user_path(current_user) do
+            = fa_icon 'cog', class: 'icon'
+    .groups
+      .group
+        - current_user.groups.each do |group|
+          = link_to group_messages_path(group) do
+            .group__name
+              = group.name
+            .group__message
+              = group.show_last_message  
+  .chat_main
+    .header
+      .left-header
+        .left-header__title
+          = @group.name
+        .left-header__members
+          = "Member: members.name"
+        .member
+      .right-header  
+        .right-header__button Edit
+
+    .messages
+      = render @messages
+    
     .form
       = form_for [@group, @message] do |f|
         = f.text_field :content, class: 'form__message', placeholder: 'type a message'
-        .form__mask
+        %la.form__mask
           = f.label :image, class: 'form__mask__image' do
             = fa_icon 'picture-o', class: 'icon'
             = f.file_field :image, class: 'hidden'
