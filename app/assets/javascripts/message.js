@@ -1,6 +1,6 @@
-$(document).on('turbolinks:load', function(){
+$(function(){
   $('#new_message').on('submit', function(e){
     e.preventDefault();
-    let message = new FormData(this);
+    var message = new FormData(this);
   })
 });
