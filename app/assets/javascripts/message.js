@@ -35,7 +35,7 @@ $(document).on('turbolinks:load', function(){
     .done(function(message){
       var html = buildHTML(message);
       $('.messages').append(html);
-      $('.form__message').val('');
+      $('form')[0].reset();
       scrollBottom();
       function scrollBottom(){
         var target = $('.message').last();
